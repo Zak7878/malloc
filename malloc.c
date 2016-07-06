@@ -77,8 +77,8 @@ void *mymalloc(size_t size)
 
 
 
-/*
-void free(void *ptr)
+
+void myfree(void *ptr)
 {
   int *p = (int*)ptr;
   int len;
@@ -88,13 +88,29 @@ void free(void *ptr)
 
 }
 
-*/
+void *calloc(size_t number, size_t size)
+{
+  size_t alloc_s = number* size;
+  void *tmp = mymalloc(alloc_s);
+  if(tmp){
+    memset(tmp,0,alloc_s);
+    return tmp;
+  }
+  return NULL;
+
+}
+
+
 int main()
 {
   mymalloc(10000);
   mymalloc(4000);
   mymalloc(2048);
   mymalloc(1000); 
+  calloc(20,100);
+  void *s = mymalloc(500);
+  myfree(s);
+  mymalloc(5000);
   
   return 0;
 }
